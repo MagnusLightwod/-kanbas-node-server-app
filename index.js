@@ -25,12 +25,17 @@ app.use(cors({
     saveUninitialized: true,
     cookie: {
       domain: 'localhost',
-      path: '/Labs/Labs',
-      
+      path: '/',
       maxAge: 5000 * 60, //5 mnt
       sameSite: 'lax' // Please use your own value based on requirements.
     }
   }
+
+  app.get('/', (req, res) => {
+    // Serve a static HTML file, a specific page, or redirect
+    // Assuming you have an index.html or landing page in your public directory:
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
 
 //   if (process.env.NODE_ENV !== "development") {
 //     sessionOptions.proxy = true;
