@@ -9,6 +9,8 @@ import AssignmentRoutes from '../Kanbas/Assignments/routes.js';
 import session from "express-session";
 import "dotenv/config";
 import EnrollmentsRoutes from '../Kanbas/Enrollments/routes.js';
+
+
 const app = express();
 
 app.use(cors({
@@ -36,11 +38,10 @@ app.use(cors({
 //     sessionOptions.cookie.domain = process.env.NODE_SERVER_DOMAIN;
 // }
 app.use(session(sessionOptions));
-  
-
 app.use(express.json()); // allows for json and http request bodys to send data securely 
-UserRoutes(app);
+
 ModuleRoutes(app);
+UserRoutes(app);
 EnrollmentsRoutes(app);
 CourseRoutes(app); // course available only using our api. 
 AssignmentRoutes(app);
