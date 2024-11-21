@@ -31,7 +31,7 @@ app.use(cors({
     }
   }
 app.get('/', (req, res) => {
-  res.redirect('/Kanbas/Labs/Home'); // Adjust the path as needed for your labs homepage
+  res.redirect('/Labs/Labs'); // Adjust the path as needed for your labs homepage
 });
 //   if (process.env.NODE_ENV !== "development") {
 //     sessionOptions.proxy = true;
