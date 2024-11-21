@@ -19,7 +19,7 @@ app.use(cors({
   })); 
 
   const sessionOptions = {
-    secret: 'sessionSecret', // Replace with a strong secret key
+    secret: 'super secret session phrase', // Replace with a strong secret key
     resave: false,
     httpOnly: true,
     saveUninitialized: true,
