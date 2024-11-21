@@ -23,6 +23,7 @@ app.use(cors({
     resave: false,
     httpOnly: true,
     saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: "mongodb+srv://.../snippetcommerce" }),
     cookie: {
       domain: 'localhost',
       path: '/',
