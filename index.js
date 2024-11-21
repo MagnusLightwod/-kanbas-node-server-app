@@ -30,13 +30,9 @@ app.use(cors({
       sameSite: 'lax' // Please use your own value based on requirements.
     }
   }
-
-  app.get('/', (req, res) => {
-    // Serve a static HTML file, a specific page, or redirect
-    // Assuming you have an index.html or landing page in your public directory:
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  });
-
+app.get('/', (req, res) => {
+  res.redirect('/Kanbas/Labs/Home'); // Adjust the path as needed for your labs homepage
+});
 //   if (process.env.NODE_ENV !== "development") {
 //     sessionOptions.proxy = true;
 //     sessionOptions.cookie.sameSite = 'none';
