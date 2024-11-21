@@ -26,6 +26,7 @@ app.use(cors({
     cookie: {
       domain: 'localhost',
       path: '/Labs/Labs',
+      
       maxAge: 5000 * 60, //5 mnt
       sameSite: 'lax' // Please use your own value based on requirements.
     }
