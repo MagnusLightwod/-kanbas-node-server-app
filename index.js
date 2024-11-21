@@ -30,9 +30,7 @@ app.use(cors({
       sameSite: 'lax' // Please use your own value based on requirements.
     }
   }
-app.get('/', (req, res) => {
-  res.redirect('/Labs/Labs'); // Adjust the path as needed for your labs homepage
-});
+
 //   if (process.env.NODE_ENV !== "development") {
 //     sessionOptions.proxy = true;
 //     sessionOptions.cookie.sameSite = 'none';
