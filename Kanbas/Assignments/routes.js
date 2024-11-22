@@ -12,12 +12,13 @@ export default function AssignmentRoutes(app) {
 
     // create a new assignment
     app.post("/api/courses/:courseid/assignments", (req, res) => {
-        const { courseId } = req.params;
-        // might edit to be even more similar to the modules route
-        const assignment = {...req.body, course: courseId};
-        const newAssignment = assignmentsDao.createAssigment(assignment);
-        res.status(201).json(newAssignment);
-    })
+      const { courseId } = req.params;
+      const assignment = { ...req.body, _id: Date.now().toString(), course: courseId };
+      const newAssignment = assignmentsDao.createAssigment(assignment);
+      console.log("New assignment created:", newAssignment); // Log for debugging
+      res.status(201).json(newAssignment);
+  });
+  
 
     // not sure exact link, could maybe nee to 
     app.delete("/api/assignments/:assignmentId", (req, res) => {
