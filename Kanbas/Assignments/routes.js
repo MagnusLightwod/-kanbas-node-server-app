@@ -11,13 +11,19 @@ export default function AssignmentRoutes(app) {
     })
 
     // create a new assignment
-    app.post("/api/courses/:courseid/assignments", (req, res) => {
-      const { courseId } = req.params;
-      const assignment = { ...req.body, _id: Date.now().toString(), course: courseId };
-      const newAssignment = assignmentsDao.createAssigment(assignment);
-      console.log("New assignment created:", newAssignment); // Log for debugging
-      res.status(201).json(newAssignment);
-  });
+  app.post("/api/courses/:courseId/assignments/new", (req, res) => {
+    const { courseId } = req.params;
+    const assignment = {
+        ...req.body,
+        _id: Date.now().toString(),
+        course: String(courseId) // Ensure 'course' is set as a string
+    };
+    console.log("Assignment being saved:", assignment); // Debugging line
+    const newAssignment = assignmentsDao.createAssigment(assignment);
+    console.log("Assignment stored in DB:", newAssignment);
+    res.status(201).json(newAssignment);
+});
+
   
 
     // not sure exact link, could maybe nee to 
