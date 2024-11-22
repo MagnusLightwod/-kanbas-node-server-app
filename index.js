@@ -19,17 +19,22 @@ app.use(cors({
   })); 
 
   const sessionOptions = {
-    secret: 'super secret session phrase', // Replace with a strong secret key
+    secret: process.env.SESSION_SECRET || 'super secret session phrase', // Use a strong secret key
     resave: false,
-    httpOnly: true,
     saveUninitialized: true,
     cookie: {
-      domain: 'localhost',
-      path: '/',
-      maxAge: 5000 * 60, //5 mnt
-      sameSite: 'lax' // Please use your own value based on requirements.
-    }
-  }
+        maxAge: 5000 * 60, // 5 minutes
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development", // Use secure cookie in production (over HTTPS)
+        sameSite: process.env.NODE_ENV === "development" ? 'lax' : 'none', // Use 'none' in production for cross-site cookies
+    },
+};
+
+// Set proxy trust if in production, necessary when behind a reverse proxy like Render or Heroku
+if (process.env.NODE_ENV !== "development") {
+    sessionOptions.proxy = true;
+}
+
 
 //   if (process.env.NODE_ENV !== "development") {
 //     sessionOptions.proxy = true;
