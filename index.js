@@ -40,10 +40,11 @@ app.use(cors({
 app.use(session(sessionOptions));
 app.use(express.json()); // allows for json and http request bodys to send data securely 
 
-ModuleRoutes(app);
+
 UserRoutes(app);
-EnrollmentsRoutes(app);
 CourseRoutes(app); // course available only using our api. 
+EnrollmentsRoutes(app);
+ModuleRoutes(app);
 AssignmentRoutes(app);
 Lab5(app);
 Hello(app)
