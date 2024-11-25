@@ -3,28 +3,44 @@ import * as courseDao from "../Courses/dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
 
 function UserRoutes(app) {
+
+
   // Route to create a new user
-  const createUser = (req, res) => { 
-    const user = dao.createUser(req.body);
+  const createUser = async (req, res) => { 
+    const user = await dao.createUser(req.body);
     res.json(user);
   };
 
   // Route to delete a user by ID
-  const deleteUser = (req, res) => {
-    const { userId } = req.params;
-    dao.deleteUser(userId);
-    res.sendStatus(204);
+  const deleteUser = async (req, res) => {
+    const status = await dao.deleteUser(req.params.userId);
+      res.json(status);
+
   };
 
   // Route to find all users
-  const findAllUsers = (req, res) => {
-    const users = dao.findAllUsers();
+  const findAllUsers = async (req, res) => {
+    const { role, name } = req.query;
+    if (role) {
+      const users = await dao.findUsersByRole(role);
+      res.json(users);
+      return;
+    }
+    if (name) {
+      const users = await dao.findUsersByPartialName(name);
+      res.json(users);
+      return;
+    }
+
+
+    const users = await dao.findAllUsers();
     res.json(users);
   };
 
+
   // Route to find a user by ID
-  const findUserById = (req, res) => {
-    const user = dao.findUserById(req.params.userId);
+  const findUserById = async (req, res) => {
+    const user = await dao.findUserById(req.params.userId);
     if (user) {
       res.json(user);
     } else {
@@ -33,32 +49,38 @@ function UserRoutes(app) {
   };
 
   // Route to update a user by ID
-  const updateUser = (req, res) => {  
+  const updateUser = async (req, res) => {  
     const userId = req.params.userId;
     const userUpdates = req.body;
-    dao.updateUser(userId, userUpdates);
-    const currentUser = dao.findUserById(userId);
-    req.session["currentUser"] = currentUser;
+    await dao.updateUser(userId, userUpdates);
+    const currentUser = req.session["currentUser"];
+    if (currentUser && currentUser._id === userId) {
+      req.session["currentUser"] = { ...currentUser, ...userUpdates };
+    }
+ 
     res.json(currentUser);
   };
 
+
+  // sign n and sign up are now asynchronous waiting on reponse from mongo
   // Route to handle user signup
-  const signup = (req, res) => {
-    console.log("Signup requested");
-    const user = dao.findUserByUsername(req.body.username);
+  const signup = async (req, res) => {
+    //console.log("Signup requested");
+    const user = await dao.findUserByUsername(req.body.username);
     if (user) {
       res.status(400).json({ message: "Username already in use" });
       return;
     }
-    const currentUser = dao.createUser(req.body);
+    const currentUser = await dao.createUser(req.body);
     req.session["currentUser"] = currentUser;
     res.json(currentUser);
   };
 
   // Route to handle user signin
-  const signin = (req, res) => { 
+  const signin = async (req, res) => { 
+    //console.log("sign in requested")
     const { username, password } = req.body;
-    const currentUser = dao.findUserByCredentials(username, password);
+    const currentUser = await dao.findUserByCredentials(username, password);
     console.log(currentUser)
     if (currentUser) {
       req.session["currentUser"] = currentUser;
@@ -77,10 +99,10 @@ function UserRoutes(app) {
 
   // Route to fetch the current user's profile
   const profile = (req, res) => { 
-    console.log("User routes, getting current user profile");
+    //console.log("User routes, getting current user profile");
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
-      console.log("No user profile found");
+       //console.log("No user profile found");
       res.sendStatus(401);
       return;
     }
@@ -89,14 +111,14 @@ function UserRoutes(app) {
 
   // Route to find courses enrolled by the current user
   const findCoursesForEnrolledUser = (req, res) => {
-    console.log("Users Route enters to find courses for enrolled user");
+    //console.log("Users Route enters to find courses for enrolled user");
     let { userId } = req.params;
     
     if (userId === "current") {
-      console.log("userId == current");
+      //console.log("userId == current");
       const currentUser = req.session["currentUser"];
-      console.log("Current user data below when finding enrolled courses");
-      console.log(currentUser);
+      //console.log("Current user data below when finding enrolled courses");
+      //console.log(currentUser);
       if (!currentUser) {
         console.log("Not current user, return status 401");
         res.sendStatus(401);
@@ -105,7 +127,7 @@ function UserRoutes(app) {
       userId = currentUser._id;
     }
 
-    console.log("Return enrolled courses");
+   // console.log("Return enrolled courses");
     const courses = courseDao.findCoursesForEnrolledUser(userId);
     res.json(courses);
   };

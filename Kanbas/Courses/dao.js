@@ -9,6 +9,7 @@ export function createCourse(course) {
 
 // Function to find all courses
 export function findAllCourses() {
+  
   return Database.courses;
 }
 
