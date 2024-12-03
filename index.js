@@ -22,9 +22,11 @@ app.use(cors({
     origin: process.env.NETLIFY_URL || "http://localhost:3000", // Allow requests from your client
     credentials: true // If you're using cookies or other authentication like sessions
   })); 
-
+    
   // these options are for online deploy
   const sessionOptions = {
+
+    
     secret: process.env.SESSION_SECRET || 'super secret session phrase', // Use a strong secret key 
     resave: false,
     saveUninitialized: true,
