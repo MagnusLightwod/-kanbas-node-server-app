@@ -25,7 +25,7 @@ app.use(cors({
 
   // these options are for online deploy
   const sessionOptions = {
-    secret: process.env.SESSION_SECRET || 'super secret session phrase', // Use a strong secret key
+    secret: process.env.SESSION_SECRET || 'super secret session phrase', // Use a strong secret key 
     resave: false,
     saveUninitialized: true,
     cookie: {
