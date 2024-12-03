@@ -11,7 +11,7 @@ export default  [{
     "section": "S101",
     "lastActivity": "2020-10-01",
     "totalActivity": "10:21:32"
-    
+   
   },
   {
     "_id": "234",

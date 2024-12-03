@@ -61,7 +61,7 @@ export default function EnrollmentsRoutes(app) {
           userId = currentUser._id;
         }
   
-        const enrolledCourses = enrollmentsDao.findCoursesForEnrolledUser(userId);
+        const enrolledCourses = enrollmentsDao.findCoursesForUser(userId);
         res.status(200).json(enrolledCourses);
       } catch (error) {
         console.error("Error finding enrolled courses for user: ", error);

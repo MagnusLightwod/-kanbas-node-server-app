@@ -23,6 +23,7 @@ app.use(cors({
     credentials: true // If you're using cookies or other authentication like sessions
   })); 
 
+  // these options are for online deploy
   const sessionOptions = {
     secret: process.env.SESSION_SECRET || 'super secret session phrase', // Use a strong secret key
     resave: false,
@@ -36,6 +37,7 @@ app.use(cors({
     },
 };
 
+  // these options are for local deploy
 // const sessionOptions = {
 //     secret: 'sessionSecret', // Replace with a strong secret key
 //     resave: false,
