@@ -18,10 +18,11 @@ const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING
 // mongoose.connect(CONNECTION_STRING);
 
 mongoose.connect(CONNECTION_STRING, {
+ 
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("Connected to MongoDB successfully!"))
+.then(() => console.log("Connected to MongoDB successfully! string = ", CONNECTION_STRING))
 .catch((err) => console.error("Failed to connect to MongoDB:", err));
 
 
