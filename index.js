@@ -16,7 +16,7 @@ import "dotenv/config";
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
 mongoose.connect(CONNECTION_STRING);
 
-   
+
 const app = express();
 app.use(cors({
     origin: process.env.NETLIFY_URL || "http://localhost:3000", // Allow requests from your client
@@ -31,7 +31,7 @@ app.use(cors({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        domain: process.env.NODE_SERVER_DOMAIN.replace('https://', ''),
+        domain: process.env.NODE_SERVER_DOMAIN,
         maxAge: 5000 * 60, // 5 minutes
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development", // Use secure cookie in production (over HTTPS)
