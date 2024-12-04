@@ -31,7 +31,7 @@ app.use(cors({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        domain: process.env.REMOTE_SERVER.replace('https://', ''),
+        domain: process.env.NODE_SERVER_DOMAIN.replace('https://', ''),
         maxAge: 5000 * 60, // 5 minutes
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development", // Use secure cookie in production (over HTTPS)
