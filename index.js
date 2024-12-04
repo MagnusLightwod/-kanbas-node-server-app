@@ -14,7 +14,7 @@ import "dotenv/config";
 
 // Mongoose connection
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING
-//  || "mongodb://127.0.0.1:27017/kanbas" || "=mongodb+srv://Maggy:secretpassword@kanbas.5bl6y.mongodb.net/" || "mongodb+srv://Maggy:secretpassword@kanbas.5bl6y.mongodb.net/?retryWrites=true&w=majority&appName=Kanbas"
+ || "mongodb://127.0.0.1:27017/kanbas" || "=mongodb+srv://Maggy:secretpassword@kanbas.5bl6y.mongodb.net/" || "mongodb+srv://Maggy:secretpassword@kanbas.5bl6y.mongodb.net/?retryWrites=true&w=majority&appName=Kanbas" || "mongodb+srv://Maggy:secretpassword@kanbas.5bl6y.mongodb.net/"
 mongoose.connect(CONNECTION_STRING);
 
 
