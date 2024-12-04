@@ -34,8 +34,8 @@ app.use(cors({
         domain: process.env.NODE_SERVER_DOMAIN,
         maxAge: 5000 * 60, // 5 minutes
         httpOnly: true,
-        secure: process.env.NODE_ENV !== "development", // Use secure cookie in production (over HTTPS)
-        sameSite: process.env.NODE_ENV === "development" ? 'lax' : 'none', // Use 'none' in production for cross-site cookies
+        secure: true, // Use secure cookie in production (over HTTPS)
+        sameSite: "none", // Use 'none' in production for cross-site cookies
     },
 };
 
