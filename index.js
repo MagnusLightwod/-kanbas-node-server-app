@@ -29,11 +29,9 @@ app.use(cors({
     
     secret: process.env.SESSION_SECRET || 'super secret session phrase', // Use a strong secret key 
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         domain: process.env.NODE_SERVER_DOMAIN,
-        maxAge: 5000 * 60, // 5 minutes
-        httpOnly: true,
         secure: true, // Use secure cookie in production (over HTTPS)
         sameSite: "none", // Use 'none' in production for cross-site cookies
     },
